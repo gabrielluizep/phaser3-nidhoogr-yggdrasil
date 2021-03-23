@@ -18,12 +18,7 @@ const config = {
   },
 
   //Remove comments on production mode
-  scene: [
-    //  TitleScene,
-    //  ModeSelectionScene,
-    GameScene,
-    //
-  ],
+  scene: [TitleScene, ModeSelectionScene, GameScene],
 };
 
 const game = new Phaser.Game(config);
