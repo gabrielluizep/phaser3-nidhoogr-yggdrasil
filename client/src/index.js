@@ -17,7 +17,6 @@ const config = {
     default: "arcade",
   },
 
-  //Remove comments on production mode
   scene: [TitleScene, ModeSelectionScene, GameScene],
 };
 

@@ -42,7 +42,7 @@ class ModeSelectionScene extends Phaser.Scene {
       () => {
         alert("Mutliplayer não está funcionando ainda");
 
-        // this.scene.start(ModeSelectionScene);
+        // this.scene.start('LobbyScene');
       },
       this
     );

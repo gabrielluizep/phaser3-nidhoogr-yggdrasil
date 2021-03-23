@@ -1,21 +1,16 @@
 import Phaser from "phaser";
 
 class TitleScene extends Phaser.Scene {
-  constructor() {
+  constructor(param) {
     super({ key: "TitleScene" });
   }
 
   preload() {}
 
   create() {
-    const sceneInformation = this.add.text(
-      0,
-      0,
-      "This scene is the TitleScene",
-      {
-        font: "20pt Arial",
-      }
-    );
+    this.add.text(0, 0, "This scene is the TitleScene", {
+      font: "20pt Arial",
+    });
 
     const playButton = this.add
       .text(640, 360, "Play", {
