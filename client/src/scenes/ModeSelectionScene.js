@@ -1,52 +1,76 @@
+// -------------------------
+// Import Phaser modules
 import Phaser from "phaser";
 
+// -------------------------
+// Create scene
 class ModeSelectionScene extends Phaser.Scene {
+  // -------------------------
+  // Constructing class state
   constructor() {
-    super({ key: "ModeSelectionScene" });
+    // Super make all the methods and properties of
+    // the parent class usable on the childreen class
+    super({
+      // Assigning a key to the the scene to locate when called
+      key: "ModeSelectionScene",
+    });
   }
+  // -------------------------
 
+  // -------------------------
+  // Preload assets
   preload() {}
+  // -------------------------
 
+  // -------------------------
+  // Create the game
   create() {
-    const sceneInformation = this.add.text(
-      0,
-      0,
-      "This scene is the ModeSelectionScene",
-      {
-        font: "20pt Arial",
-      }
-    );
-
-    const singlePlayerButton = this.add
+    // -------------------------
+    // Create a text
+    this.add
       .text(640, 360, "Single Player", {
         font: "30pt Arial",
       })
-      .setInteractive();
+      // Set the text interactive
+      .setInteractive()
+      // Add a listener, when the event occured
+      // with the text matcher the firs parameter
+      // execute the function on the second parameter
+      .on(
+        "pointerdown",
+        () => {
+          // Start a new scene
+          this.scene.start("GameScene");
+        },
+        this
+      );
+    // -------------------------
 
-    singlePlayerButton.on(
-      "pointerdown",
-      () => {
-        this.scene.start("GameScene");
-      },
-      this
-    );
-
-    const multiPlayerButton = this.add
+    // -------------------------
+    // Same as above
+    this.add
       .text(640, 460, "Multiplayer", {
         font: "30pt Arial",
       })
-      .setInteractive();
+      .setInteractive()
+      .on(
+        "pointerdown",
+        () => {
+          alert("Mutliplayer não está funcionando ainda");
 
-    multiPlayerButton.on(
-      "pointerdown",
-      () => {
-        alert("Mutliplayer não está funcionando ainda");
-
-        // this.scene.start('LobbyScene');
-      },
-      this
-    );
+          // this.scene.start('LobbyScene');
+        },
+        this
+      );
+    // -------------------------
   }
 }
 
+// -------------------------
+// Export as default of the file the scene
 export default ModeSelectionScene;
+// -------------------------
+
+// *
+// *
+// *

@@ -1,4 +1,9 @@
-import player from "./img/32x32 Pink Block.png";
+import playerJump from "./img/player/jump.png";
+import playerRun from "./img/player/run.png";
 import ground from "./img/160x320 Green Rectangle.png";
+// import ground from "./img/ground.png";
+import blueSky from "./img/background/sky_fc.png";
 
-export { player, ground };
+// import * as jumpSound from "./audio/jump/index.js";
+
+export { playerJump, playerRun, ground, blueSky };

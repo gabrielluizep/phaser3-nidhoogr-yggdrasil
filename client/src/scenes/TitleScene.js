@@ -1,32 +1,62 @@
+// -------------------------
+// Importing Phaser modules
 import Phaser from "phaser";
+// -------------------------
 
+// -------------------------
+// Creating Scene
 class TitleScene extends Phaser.Scene {
-  constructor(param) {
-    super({ key: "TitleScene" });
-  }
-
-  preload() {}
-
-  create() {
-    this.add.text(0, 0, "This scene is the TitleScene", {
-      font: "20pt Arial",
+  // -------------------------
+  // Constructing class state
+  constructor() {
+    // Super make all the methods and properties of
+    // the parent class usable on the childreen class
+    super({
+      // Assigning a key to the scene to locate when called
+      key: "TitleScene",
     });
+  }
+  // -------------------------
 
-    const playButton = this.add
+  // -------------------------
+  // Preload assets
+  preload() {}
+  // -------------------------
+
+  // -------------------------
+  // Create the game
+  create() {
+    // -------------------------
+    // Create a text on the x=640(first parameter)
+    // and y=360 (second parameter) with the
+    // text 'Play' written (third parameter)
+    // and set the styling to the text (fourth parameter).
+    // Stored on a class propiertie to use inside the class
+    this.add
       .text(640, 360, "Play", {
         font: "30pt Arial",
       })
-      .setInteractive();
-
-    playButton.on(
-      "pointerdown",
-      () => {
-        // Start scene based on the key defined on the class constructor
-        this.scene.start("ModeSelectionScene");
-      },
-      this
-    );
+      // Enable interacting with the text
+      .setInteractive()
+      // Create a listener on the text 'Play'
+      // when the event on the text matches 'pointerdown' (first parameter)
+      // execute the a function (second parameter) and define
+      // the scope of event listening (third parameter)
+      .on(
+        "pointerdown",
+        () => {
+          // Start a scene based on the key defined on the class constructor
+          this.scene.start("ModeSelectionScene");
+        },
+        this
+      );
   }
 }
-
+// -------------------------
+// Export as default of the file the scene
 export default TitleScene;
+// -------------------------
+
+// *
+// *
+// *
