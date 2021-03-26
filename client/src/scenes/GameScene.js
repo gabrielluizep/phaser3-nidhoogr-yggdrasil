@@ -18,7 +18,12 @@ class GameScene extends Phaser.Scene {
 
   preload() {
     this.load.image("ground", assets.ground);
-    this.load.image("blueSky", assets.blueSky);
+    this.load.image("layer0", assets.layer0);
+    this.load.image("layer1", assets.layer1);
+    this.load.image("layer2", assets.layer2);
+    this.load.image("layer3", assets.layer3);
+    this.load.image("layer4", assets.layer4);
+
     // this.load.audio('backgroundMusic', assets.backgroundMusic)
 
     this.load.audio("jumpAudio", "../assets/audio/jump/jump_01.mp3");
@@ -41,15 +46,76 @@ class GameScene extends Phaser.Scene {
     // -------------------------
 
     // -------------------------
+    // Parallax Layers
     //
     this.add
-      .image(0, 0, "blueSky")
+      .image(0, 0, "layer0")
       //
-      .setOrigin(0, 0)
-      //
-      .setScale(4);
-    // -------------------------
+      .setOrigin(0, 0);
 
+    // -------------------------
+    //
+    this.add
+      .image(0, 0, "layer1")
+      //
+      .setOrigin(0, 0);
+
+    // -------------------------
+    //
+    this.add
+      .image(0, 0, "layer2")
+      //
+      .setOrigin(0, 0);
+
+    // -------------------------
+    //
+    this.add
+      .image(0, 0, "layer3")
+      //
+      .setOrigin(0, 0);
+
+    // -------------------------
+    //
+    this.add
+      .image(0, 0, "layer4")
+      //
+      .setOrigin(0, 0);
+
+    //
+    // --------------------
+    //  TEST - PARALLAX
+    /*
+    this.hslayer1 = this.game.add.tileSprite(
+      0,
+      this.game.height - this.game.cache.getImage("layer1").height,
+      this.game.width,
+      this.game.cache.getImage("layer1").height,
+      "layer1"
+    );
+
+    this.hslayer3 = this.game.add.tileSprite(
+      0,
+      this.game.height - this.game.cache.getImage("layer3").height,
+      this.game.width,
+      this.game.cache.getImage("layer3").height,
+      "layer3"
+    );
+
+    this.hslayer4 = this.game.add.tileSprite(
+      0,
+      this.game.height - this.game.cache.getImage("layer4").height,
+      this.game.width,
+      this.game.cache.getImage("layer4").height,
+      "layer4"
+    );
+    */
+    //
+    //
+    //  TEST - PARALLAX
+    // ---------------------
+    //
+    //
+    //
     this.groundGroup = this.add.group({
       removeCallback: (ground) => {
         ground.scene.groundPool.add(ground);
@@ -161,6 +227,15 @@ class GameScene extends Phaser.Scene {
 
       this.addGround(nextGroundWidth, 1280 + nextGroundWidth / 2);
     }
+
+    //
+    // TEST - PARALLAX
+    //
+    /*
+    this.hslayer1.tilePosition.x -= 0.05;
+    this.hslayer3.tilePosition.x -= 0.3;
+    this.hslayer4.tilePosition.x -= 0.75;
+    */
   }
 }
 // -------------------------
