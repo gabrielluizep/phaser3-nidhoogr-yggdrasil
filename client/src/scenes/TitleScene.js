@@ -26,6 +26,17 @@ class TitleScene extends Phaser.Scene {
   // -------------------------
   // Create the game
   create() {
+    this.add
+      .text(0, 0, "Toggle Fullscreen", {
+        font: "20pt Arial",
+      })
+      .setInteractive()
+      .on("pointerdown", () => {
+        !this.scale.isFullscreen
+          ? this.scale.startFullscreen()
+          : this.scale.stopFullscreen();
+      });
+
     // -------------------------
     // Create a text on the x=640(first parameter)
     // and y=360 (second parameter) with the
