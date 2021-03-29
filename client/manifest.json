@@ -1,0 +1,32 @@
+{
+  "name": "Yggdrasil",
+  "short_name": "Yggdrasil",
+  "lang": "pt-BR",
+  "start_url": "index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "",
+      "sizes": "128x128"
+    },
+    {
+      "src": "",
+      "sizes": "192x192"
+    },
+    {
+      "src": "",
+      "sizes": "256x256"
+    },
+    {
+      "src": "",
+      "sizes": "384x384"
+    },
+    {
+      "src": "",
+      "sizes": "512x512"
+    }
+  ]
+}
