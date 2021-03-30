@@ -13,15 +13,6 @@ class Game extends Phaser.Scene {
   }
 
   create() {
-    const sceneInformation = this.add.text(
-      0,
-      0,
-      "This scene is the GameScene",
-      {
-        font: "20pt Arial",
-      }
-    );
-
     const ground = this.physics.add.staticGroup();
 
     ground
