@@ -18,7 +18,12 @@ class GameScene extends Phaser.Scene {
 
   preload() {
     this.load.image("ground", assets.ground);
-    this.load.image("blueSky", assets.blueSky);
+    this.load.image("layer0", assets.layer0);
+    this.load.image("layer1", assets.layer1);
+    this.load.image("layer2", assets.layer2);
+    this.load.image("layer3", assets.layer3);
+    this.load.image("layer4", assets.layer4);
+
     // this.load.audio('backgroundMusic', assets.backgroundMusic)
 
     this.load.audio("jumpAudio", "../assets/audio/jump/jump_01.mp3");
@@ -41,15 +46,73 @@ class GameScene extends Phaser.Scene {
     // -------------------------
 
     // -------------------------
+    // Background Layers (inert)
     //
-    this.add
-      .image(0, 0, "blueSky")
-      //
-      .setOrigin(0, 0)
-      //
-      .setScale(4);
-    // -------------------------
 
+    // layer0
+    this.add
+      .image(0, 0, "layer0")
+      //
+      .setOrigin(0, 0);
+
+    // layer2
+    this.add
+      .image(0, 0, "layer2")
+      //
+      .setOrigin(0, 0);
+
+    //
+    //  Parallax - Start
+    //
+
+    // Get the window sizes
+    let windowWidth = window.innerWidth;
+    let windowHeight = window.innerHeight;
+
+    // Find the center of the top space
+    let topBackgroundXOrigin = windowWidth / 2.5;
+    let topBackgroundYOrigin = (windowHeight / 5) * 2;
+    let topBackgroundHeight = (windowHeight / 5) * 5;
+
+    // Base width and height of the images
+    let imageBaseWidth = 1280;
+    let imageBaseHeight = 640;
+    let heightRatio = topBackgroundHeight / imageBaseHeight;
+
+    // Add each layer one by one
+
+    // layer1
+    this.hslayer1 = this.add.tileSprite(
+      topBackgroundXOrigin,
+      topBackgroundYOrigin,
+      imageBaseWidth,
+      imageBaseHeight,
+      "layer1"
+    );
+    this.hslayer1.setScale(heightRatio);
+
+    // layer3
+    this.hslayer3 = this.add.tileSprite(
+      topBackgroundXOrigin,
+      topBackgroundYOrigin,
+      imageBaseWidth,
+      imageBaseHeight,
+      "layer3"
+    );
+    this.hslayer3.setScale(heightRatio);
+
+    // layer4
+    this.hslayer4 = this.add.tileSprite(
+      topBackgroundXOrigin,
+      topBackgroundYOrigin,
+      imageBaseWidth,
+      imageBaseHeight,
+      "layer4"
+    );
+    this.hslayer4.setScale(heightRatio);
+    //
+    // Parallax - End
+    //
     this.groundGroup = this.add.group({
       removeCallback: (ground) => {
         ground.scene.groundPool.add(ground);
@@ -161,6 +224,11 @@ class GameScene extends Phaser.Scene {
 
       this.addGround(nextGroundWidth, 1280 + nextGroundWidth / 2);
     }
+
+    // Test Parallax
+    this.hslayer1.tilePositionX += 0.15;
+    this.hslayer3.tilePositionX += 0.1;
+    this.hslayer4.tilePositionX += 0.2;
   }
 }
 // -------------------------
