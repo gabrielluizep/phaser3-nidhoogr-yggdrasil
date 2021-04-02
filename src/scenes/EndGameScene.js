@@ -23,7 +23,6 @@ class EndGameScene extends Phaser.Scene {
       .on(
         "pointerdown",
         () => {
-          // Start scene based on the key defined on the class constructor
           this.scene.start("ModeSelectionScene");
         },
         this

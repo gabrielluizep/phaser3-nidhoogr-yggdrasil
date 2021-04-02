@@ -1,16 +1,10 @@
-// -------------------------
 // Import Phaser module
 import Phaser from "phaser";
-// -------------------------
 
-// -------------------------
-// Import all the exports on the file index.js on the
-// assets folder as an object with directories location
+// Importing assets
 import * as images from "../assets/images";
 import * as audio from "../assets/audio";
-// -------------------------
 
-// -------------------------
 // Create scene
 class GameScene extends Phaser.Scene {
   constructor() {
@@ -43,11 +37,18 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
+    // Define canvas
+    this.gameWidth = 1280;
+    this.gameHeight = 640;
+
     // Adding music
     this.backgroundMusic = this.sound.add("backgroundMusic", {
       volume: 0.2,
       loop: true,
     });
+
+    // Initiating music
+    this.backgroundMusic.play();
 
     // Adding jump sounds
     this.jumpSound1 = this.sound.add("jumpSound1", {
@@ -62,36 +63,27 @@ class GameScene extends Phaser.Scene {
       volume: 0.3,
     });
 
+    // Creating array of jump sounds to random select
     this.jumpSound = [this.jumpSound1, this.jumpSound2, this.jumpSound3];
-
-    // Initiating music
-    this.backgroundMusic.play();
 
     // Adding static background
     this.add.image(0, 0, "skyBackground").setOrigin(0, 0);
     this.add.image(0, 0, "yggdrasil").setOrigin(0, 0);
-
-    // Define canvas
-    this.gameWidth = 1280;
-    this.gameHeight = 640;
 
     // Adding background parallax effect
     this.lowCloudBackground = this.add
       .tileSprite(0, 0, this.gameWidth, this.gameHeight, "lowCloud")
       .setOrigin(0, 0);
 
-    // montainTips
     this.montainTipsBackground = this.add
       .tileSprite(0, 0, this.gameWidth, this.gameHeight, "montainTips")
       .setOrigin(0, 0);
 
-    // highClouds
     this.highCloudsBackground = this.add
       .tileSprite(0, 0, this.gameWidth, this.gameHeight, "highClouds")
       .setOrigin(0, 0);
 
-    // -------------------------
-
+    // Creating groups for the ground
     this.groundGroup = this.add.group({
       removeCallback: (ground) => {
         ground.scene.groundPool.add(ground);
@@ -212,13 +204,5 @@ class GameScene extends Phaser.Scene {
     this.highCloudsBackground.tilePositionX += 0.2;
   }
 }
-// -------------------------
 
-// -------------------------
-// Export as default of the file the scene
 export default GameScene;
-// -------------------------
-
-// *
-// *
-// *
