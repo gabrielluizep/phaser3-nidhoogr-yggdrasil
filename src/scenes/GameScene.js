@@ -206,7 +206,7 @@ class GameScene extends Phaser.Scene {
       this.addGround(nextGroundWidth, this.gameWidth + nextGroundWidth / 2);
     }
 
-    // Test Parallax
+    // Parallax
     this.lowCloudBackground.tilePositionX += 0.15;
     this.montainTipsBackground.tilePositionX += 0.1;
     this.highCloudsBackground.tilePositionX += 0.2;

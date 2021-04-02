@@ -33,6 +33,7 @@ class ModeSelectionScene extends Phaser.Scene {
       })
       // Set the text interactive
       .setInteractive()
+      .setOrigin(0.5, 0.5)
       // Add a listener, when the event occured
       // with the text matcher the firs parameter
       // execute the function on the second parameter
@@ -53,6 +54,7 @@ class ModeSelectionScene extends Phaser.Scene {
         font: "30pt Arial",
       })
       .setInteractive()
+      .setOrigin(0.5, 0.5)
       .on(
         "pointerdown",
         () => {

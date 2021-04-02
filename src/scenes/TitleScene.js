@@ -49,6 +49,7 @@ class TitleScene extends Phaser.Scene {
       })
       // Enable interacting with the text
       .setInteractive()
+      .setOrigin(0.5, 0.5)
       // Create a listener on the text 'Play'
       // when the event on the text matches 'pointerdown' (first parameter)
       // execute the a function (second parameter) and define
