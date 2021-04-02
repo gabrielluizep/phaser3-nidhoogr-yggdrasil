@@ -20,7 +20,7 @@ const config = {
 
   parent: "phaser-example",
 
-  // 1280x640 || 40x20(32x32)
+  // 1280x640 || 40x20(base 32x32)
   width: 1280,
   height: 640,
   autoCenter: Phaser.Scale.CENTER_BOTH,

@@ -25,11 +25,12 @@ class GameScene extends Phaser.Scene {
     this.load.audio("jumpSound3", audio.jumpSound3);
 
     this.load.image("ground", images.ground);
-    this.load.image("layer0", images.layer0);
-    this.load.image("layer1", images.layer1);
-    this.load.image("layer2", images.layer2);
-    this.load.image("layer3", images.layer3);
-    this.load.image("layer4", images.layer4);
+
+    this.load.image("skyBackground", images.skyBackground);
+    this.load.image("lowCloud", images.lowCloud);
+    this.load.image("yggdrasil", images.yggdrasil);
+    this.load.image("montainTips", images.montainTips);
+    this.load.image("highClouds", images.highClouds);
 
     this.load.spritesheet("playerRun", images.playerRun, {
       frameWidth: 32,
@@ -42,12 +43,13 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
-    // Adding sound to the game
+    // Adding music
     this.backgroundMusic = this.sound.add("backgroundMusic", {
       volume: 0.2,
       loop: true,
     });
 
+    // Adding jump sounds
     this.jumpSound1 = this.sound.add("jumpSound1", {
       volume: 0.3,
     });
@@ -62,67 +64,34 @@ class GameScene extends Phaser.Scene {
 
     this.jumpSound = [this.jumpSound1, this.jumpSound2, this.jumpSound3];
 
+    // Initiating music
     this.backgroundMusic.play();
 
+    // Adding static background
+    this.add.image(0, 0, "skyBackground").setOrigin(0, 0);
+    this.add.image(0, 0, "yggdrasil").setOrigin(0, 0);
+
+    // Define canvas
+    this.gameWidth = 1280;
+    this.gameHeight = 640;
+
+    // Adding background parallax effect
+    this.lowCloudBackground = this.add
+      .tileSprite(0, 0, this.gameWidth, this.gameHeight, "lowCloud")
+      .setOrigin(0, 0);
+
+    // montainTips
+    this.montainTipsBackground = this.add
+      .tileSprite(0, 0, this.gameWidth, this.gameHeight, "montainTips")
+      .setOrigin(0, 0);
+
+    // highClouds
+    this.highCloudsBackground = this.add
+      .tileSprite(0, 0, this.gameWidth, this.gameHeight, "highClouds")
+      .setOrigin(0, 0);
+
     // -------------------------
-    // Background Layers (inert)
 
-    // layer0
-    this.add.image(0, 0, "layer0").setOrigin(0, 0);
-
-    // layer2
-    this.add.image(0, 0, "layer2").setOrigin(0, 0);
-
-    //  Parallax - Start
-
-    // Get the window sizes
-    let windowWidth = window.innerWidth;
-    let windowHeight = window.innerHeight;
-
-    // Find the center of the top space
-    let topBackgroundXOrigin = windowWidth / 2.5;
-    let topBackgroundYOrigin = (windowHeight / 5) * 2;
-    let topBackgroundHeight = (windowHeight / 5) * 5;
-
-    // Base width and height of the images
-    let imageBaseWidth = 1280;
-    let imageBaseHeight = 640;
-    let heightRatio = topBackgroundHeight / imageBaseHeight;
-
-    // Add each layer one by one
-
-    // layer1
-    this.hslayer1 = this.add.tileSprite(
-      topBackgroundXOrigin,
-      topBackgroundYOrigin,
-      imageBaseWidth,
-      imageBaseHeight,
-      "layer1"
-    );
-    this.hslayer1.setScale(heightRatio);
-
-    // layer3
-    this.hslayer3 = this.add.tileSprite(
-      topBackgroundXOrigin,
-      topBackgroundYOrigin,
-      imageBaseWidth,
-      imageBaseHeight,
-      "layer3"
-    );
-    this.hslayer3.setScale(heightRatio);
-
-    // layer4
-    this.hslayer4 = this.add.tileSprite(
-      topBackgroundXOrigin,
-      topBackgroundYOrigin,
-      imageBaseWidth,
-      imageBaseHeight,
-      "layer4"
-    );
-    this.hslayer4.setScale(heightRatio);
-    //
-    // Parallax - End
-    //
     this.groundGroup = this.add.group({
       removeCallback: (ground) => {
         ground.scene.groundPool.add(ground);
@@ -135,14 +104,13 @@ class GameScene extends Phaser.Scene {
       },
     });
 
-    this.addGround(1280, 1280 / 2);
+    this.addGround(this.gameWidth, this.gameWidth / 2);
 
     this.player = this.physics.add
       .sprite(640, 360, "playerRun")
-      .setScale(1)
+      .setScale(2)
       .setBounce(0.05)
-      .setGravityY(600)
-      .setVelocityX(100);
+      .setGravityY(600);
 
     this.physics.add.collider(this.player, this.groundGroup);
 
@@ -174,7 +142,7 @@ class GameScene extends Phaser.Scene {
       const randomIndex = Math.floor(Math.random() * 3);
 
       this.jumpSound[randomIndex].play();
-      this.player.setVelocityX(50);
+
       this.player.setVelocityY(5000000);
     }
   }
@@ -217,12 +185,12 @@ class GameScene extends Phaser.Scene {
       this.player.anims.play("run", true);
     }
 
-    this.player.x = 640;
+    this.player.x = this.gameHeight;
 
-    let minDistance = 1280;
+    let minDistance = this.gameWidth;
 
     this.groundGroup.getChildren().forEach((ground) => {
-      let groundDistance = 1280 - ground.x - ground.displayWidth / 2;
+      let groundDistance = this.gameWidth - ground.x - ground.displayWidth / 2;
 
       minDistance = Math.min(minDistance, groundDistance);
 
@@ -235,13 +203,13 @@ class GameScene extends Phaser.Scene {
     if (minDistance > this.nextGroundDistance) {
       let nextGroundWidth = Phaser.Math.Between(100, 350);
 
-      this.addGround(nextGroundWidth, 1280 + nextGroundWidth / 2);
+      this.addGround(nextGroundWidth, this.gameWidth + nextGroundWidth / 2);
     }
 
     // Test Parallax
-    this.hslayer1.tilePositionX += 0.15;
-    this.hslayer3.tilePositionX += 0.1;
-    this.hslayer4.tilePositionX += 0.2;
+    this.lowCloudBackground.tilePositionX += 0.15;
+    this.montainTipsBackground.tilePositionX += 0.1;
+    this.highCloudsBackground.tilePositionX += 0.2;
   }
 }
 // -------------------------
