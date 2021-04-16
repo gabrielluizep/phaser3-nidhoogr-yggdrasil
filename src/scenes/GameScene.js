@@ -279,32 +279,6 @@ class GameScene extends Phaser.Scene {
     this.hslayer1.tilePositionX += 0.15;
     this.hslayer3.tilePositionX += 0.1;
     this.hslayer4.tilePositionX += 0.2;
-
-    // Increase the score over the time
-    /*
-    this.handleScore();
-    {
-      this.time.addEvent({
-        delay: 1000 / 10,
-        loop: true,
-        callbackScope: this,
-        callback: () => {
-          if (!this.isGameRunning) {
-            return;
-          }
-
-          this.score++;
-
-          const score = Array.from(String(this.score), Number);
-
-          for (let i = 0; i < 5 - String(this.score).length; i++) {
-            score.unshift(0);
-          }
-          this.scoreText.setText(score.join(""));
-        },
-      });
-    }
-  */
   }
 }
 // -------------------------
