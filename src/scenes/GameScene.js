@@ -114,7 +114,7 @@ class GameScene extends Phaser.Scene {
       repeat: -1,
       frames: this.anims.generateFrameNumbers("playerRun", {
         start: 1,
-        end: 8,
+        end: 6,
       }),
     });
 
@@ -126,6 +126,43 @@ class GameScene extends Phaser.Scene {
         start: 1,
         end: 8,
       }),
+    });
+
+    //
+    // ----------
+    // Add the score text
+    //
+    this.score = 0;
+    this.scoreText = this.add
+      .text(0, 0, "00000", {
+        fill: "535353",
+        font: "900 35px Courier",
+        resolution: 5,
+      })
+      .setOrigin(0, 0);
+    //
+    //-------------
+    // Calling the function
+    //
+    this.handleScore();
+  }
+
+  // Increase the score over the time
+  handleScore() {
+    this.time.addEvent({
+      delay: 1000 / 10,
+      loop: true,
+      callbackScope: this,
+      callback: () => {
+        this.score++;
+
+        const score = Array.from(String(this.score), Number);
+
+        for (let i = 0; i < 5 - String(this.score).length; i++) {
+          score.unshift(0);
+        }
+        this.scoreText.setText(score.join(""));
+      },
     });
   }
 
@@ -197,6 +234,7 @@ class GameScene extends Phaser.Scene {
 
       this.addGround(nextGroundWidth, this.gameWidth + nextGroundWidth / 2);
     }
+
 
     // Parallax
     this.lowCloudBackground.tilePositionX += 0.15;
