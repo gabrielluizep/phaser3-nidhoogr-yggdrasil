@@ -218,7 +218,9 @@ class GameScene extends Phaser.Scene {
 
     let minDistance = this.gameWidth;
 
-    this.groundGroup.getChildren().forEach(ground => {
+    for (let i = 0; i < this.groundGroup.getChildren().length; i++) {
+      const ground = this.groundGroup.getChildren()[i];
+
       const groundDistance =
         this.gameWidth - ground.x - ground.displayWidth / 2;
 
@@ -228,7 +230,7 @@ class GameScene extends Phaser.Scene {
         this.groundGroup.killAndHide(ground);
         this.groundGroup.remove(ground);
       }
-    }, this);
+    }
 
     if (minDistance > this.nextGroundDistance) {
       const nextGroundWidth = Phaser.Math.Between(100, 350);

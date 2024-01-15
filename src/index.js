@@ -30,4 +30,5 @@ const config = {
 };
 
 // Starting the game
+// biome-ignore lint/correctness/noUnusedVariables: <explanation>
 const game = new Phaser.Game(config);
