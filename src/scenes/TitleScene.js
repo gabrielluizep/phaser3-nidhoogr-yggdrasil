@@ -1,12 +1,12 @@
 // Importing Phaser modules
-import Phaser from "phaser";
+import Phaser from 'phaser';
 
 // Creating Scene
 class TitleScene extends Phaser.Scene {
   constructor() {
     super({
       // Assigning a key to the scene
-      key: "TitleScene",
+      key: 'TitleScene',
     });
   }
 
@@ -17,11 +17,11 @@ class TitleScene extends Phaser.Scene {
   create() {
     // Adding interactive text to turn fullscreen
     this.add
-      .text(0, 0, "Toggle Fullscreen", {
-        font: "20pt Arial",
+      .text(0, 0, 'Toggle Fullscreen', {
+        font: '20pt Arial',
       })
       .setInteractive()
-      .on("pointerdown", () => {
+      .on('pointerdown', () => {
         !this.scale.isFullscreen
           ? this.scale.startFullscreen()
           : this.scale.stopFullscreen();
@@ -29,17 +29,17 @@ class TitleScene extends Phaser.Scene {
 
     // Creating play interactive text
     this.add
-      .text(640, 360, "Play", {
-        font: "30pt Arial",
+      .text(640, 360, 'Play', {
+        font: '30pt Arial',
       })
       .setInteractive()
       .setOrigin(0.5, 0.5)
       .on(
-        "pointerdown",
+        'pointerdown',
         () => {
-          this.scene.start("ModeSelectionScene");
+          this.scene.start('ModeSelectionScene');
         },
-        this
+        this,
       );
   }
 }

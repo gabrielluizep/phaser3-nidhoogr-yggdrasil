@@ -1,36 +1,36 @@
 // Import Phaser module
-import Phaser from "phaser";
+import Phaser from 'phaser';
 
+import * as audio from '../assets/audio';
 // Importing assets
-import * as images from "../assets/images";
-import * as audio from "../assets/audio";
+import * as images from '../assets/images';
 
 // Create scene
 class GameScene extends Phaser.Scene {
   constructor() {
-    super({ key: "GameScene" });
+    super({ key: 'GameScene' });
   }
 
   preload() {
-    this.load.audio("backgroundMusic", audio.runGameMusic);
+    this.load.audio('backgroundMusic', audio.runGameMusic);
 
-    this.load.audio("jumpSound1", audio.jumpSound1);
-    this.load.audio("jumpSound2", audio.jumpSound2);
-    this.load.audio("jumpSound3", audio.jumpSound3);
+    this.load.audio('jumpSound1', audio.jumpSound1);
+    this.load.audio('jumpSound2', audio.jumpSound2);
+    this.load.audio('jumpSound3', audio.jumpSound3);
 
-    this.load.image("ground", images.ground);
+    this.load.image('ground', images.ground);
 
-    this.load.image("skyBackground", images.skyBackground);
-    this.load.image("lowCloud", images.lowCloud);
-    this.load.image("yggdrasil", images.yggdrasil);
-    this.load.image("montainTips", images.montainTips);
-    this.load.image("highClouds", images.highClouds);
+    this.load.image('skyBackground', images.skyBackground);
+    this.load.image('lowCloud', images.lowCloud);
+    this.load.image('yggdrasil', images.yggdrasil);
+    this.load.image('montainTips', images.montainTips);
+    this.load.image('highClouds', images.highClouds);
 
-    this.load.spritesheet("playerRun", images.playerRun, {
+    this.load.spritesheet('playerRun', images.playerRun, {
       frameWidth: 32,
       frameHeight: 32,
     });
-    this.load.spritesheet("playerJump", images.playerJump, {
+    this.load.spritesheet('playerJump', images.playerJump, {
       frameWidth: 32,
       frameHeight: 32,
     });
@@ -42,7 +42,7 @@ class GameScene extends Phaser.Scene {
     this.gameHeight = 640;
 
     // Adding music
-    this.backgroundMusic = this.sound.add("backgroundMusic", {
+    this.backgroundMusic = this.sound.add('backgroundMusic', {
       volume: 0.2,
       loop: true,
     });
@@ -51,15 +51,15 @@ class GameScene extends Phaser.Scene {
     this.backgroundMusic.play();
 
     // Adding jump sounds
-    this.jumpSound1 = this.sound.add("jumpSound1", {
+    this.jumpSound1 = this.sound.add('jumpSound1', {
       volume: 0.3,
     });
 
-    this.jumpSound2 = this.sound.add("jumpSound2", {
+    this.jumpSound2 = this.sound.add('jumpSound2', {
       volume: 0.3,
     });
 
-    this.jumpSound3 = this.sound.add("jumpSound3", {
+    this.jumpSound3 = this.sound.add('jumpSound3', {
       volume: 0.3,
     });
 
@@ -67,31 +67,31 @@ class GameScene extends Phaser.Scene {
     this.jumpSound = [this.jumpSound1, this.jumpSound2, this.jumpSound3];
 
     // Adding static background
-    this.add.image(0, 0, "skyBackground").setOrigin(0, 0);
-    this.add.image(0, 0, "yggdrasil").setOrigin(0, 0);
+    this.add.image(0, 0, 'skyBackground').setOrigin(0, 0);
+    this.add.image(0, 0, 'yggdrasil').setOrigin(0, 0);
 
     // Adding background parallax effect
     this.lowCloudBackground = this.add
-      .tileSprite(0, 0, this.gameWidth, this.gameHeight, "lowCloud")
+      .tileSprite(0, 0, this.gameWidth, this.gameHeight, 'lowCloud')
       .setOrigin(0, 0);
 
     this.montainTipsBackground = this.add
-      .tileSprite(0, 0, this.gameWidth, this.gameHeight, "montainTips")
+      .tileSprite(0, 0, this.gameWidth, this.gameHeight, 'montainTips')
       .setOrigin(0, 0);
 
     this.highCloudsBackground = this.add
-      .tileSprite(0, 0, this.gameWidth, this.gameHeight, "highClouds")
+      .tileSprite(0, 0, this.gameWidth, this.gameHeight, 'highClouds')
       .setOrigin(0, 0);
 
     // Creating groups for the ground
     this.groundGroup = this.add.group({
-      removeCallback: (ground) => {
+      removeCallback: ground => {
         ground.scene.groundPool.add(ground);
       },
     });
 
     this.groundPool = this.add.group({
-      removeCallback: (ground) => {
+      removeCallback: ground => {
         ground.scene.groundGroup.add(ground);
       },
     });
@@ -99,30 +99,30 @@ class GameScene extends Phaser.Scene {
     this.addGround(this.gameWidth, this.gameWidth / 2);
 
     this.player = this.physics.add
-      .sprite(640, 360, "playerRun")
+      .sprite(640, 360, 'playerRun')
       .setScale(2)
       .setBounce(0.05)
       .setGravityY(600);
 
     this.physics.add.collider(this.player, this.groundGroup);
 
-    this.input.on("pointerdown", this.jump, this);
+    this.input.on('pointerdown', this.jump, this);
 
     this.anims.create({
-      key: "run",
+      key: 'run',
       frameRate: 15,
       repeat: -1,
-      frames: this.anims.generateFrameNumbers("playerRun", {
+      frames: this.anims.generateFrameNumbers('playerRun', {
         start: 1,
         end: 6,
       }),
     });
 
     this.anims.create({
-      key: "jump",
+      key: 'jump',
       frameRate: 8,
       repeat: -1,
-      frames: this.anims.generateFrameNumbers("playerJump", {
+      frames: this.anims.generateFrameNumbers('playerJump', {
         start: 1,
         end: 8,
       }),
@@ -134,9 +134,9 @@ class GameScene extends Phaser.Scene {
     //
     this.score = 0;
     this.scoreText = this.add
-      .text(0, 0, "00000", {
-        fill: "535353",
-        font: "900 35px Courier",
+      .text(0, 0, '00000', {
+        fill: '535353',
+        font: '900 35px Courier',
         resolution: 5,
       })
       .setOrigin(0, 0);
@@ -161,7 +161,7 @@ class GameScene extends Phaser.Scene {
         for (let i = 0; i < 5 - String(this.score).length; i++) {
           score.unshift(0);
         }
-        this.scoreText.setText(score.join(""));
+        this.scoreText.setText(score.join(''));
       },
     });
   }
@@ -189,7 +189,7 @@ class GameScene extends Phaser.Scene {
 
       this.groundPool.remove(ground);
     } else {
-      ground = this.physics.add.sprite(posX, 600, "ground");
+      ground = this.physics.add.sprite(posX, 600, 'ground');
 
       ground.setImmovable(true);
       ground.setVelocityX(-200);
@@ -204,22 +204,23 @@ class GameScene extends Phaser.Scene {
 
   update() {
     if (this.player.y > 720) {
-      this.scene.start("EndGameScene");
+      this.scene.start('EndGameScene');
       this.backgroundMusic.stop();
     }
 
     if (!this.player.body.touching.down) {
-      this.player.anims.play("jump", true);
+      this.player.anims.play('jump', true);
     } else {
-      this.player.anims.play("run", true);
+      this.player.anims.play('run', true);
     }
 
     this.player.x = this.gameHeight;
 
     let minDistance = this.gameWidth;
 
-    this.groundGroup.getChildren().forEach((ground) => {
-      let groundDistance = this.gameWidth - ground.x - ground.displayWidth / 2;
+    this.groundGroup.getChildren().forEach(ground => {
+      const groundDistance =
+        this.gameWidth - ground.x - ground.displayWidth / 2;
 
       minDistance = Math.min(minDistance, groundDistance);
 
@@ -230,11 +231,10 @@ class GameScene extends Phaser.Scene {
     }, this);
 
     if (minDistance > this.nextGroundDistance) {
-      let nextGroundWidth = Phaser.Math.Between(100, 350);
+      const nextGroundWidth = Phaser.Math.Between(100, 350);
 
       this.addGround(nextGroundWidth, this.gameWidth + nextGroundWidth / 2);
     }
-
 
     // Parallax
     this.lowCloudBackground.tilePositionX += 0.15;

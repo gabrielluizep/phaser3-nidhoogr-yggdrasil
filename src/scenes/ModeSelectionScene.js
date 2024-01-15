@@ -1,12 +1,12 @@
 // Import Phaser modules
-import Phaser from "phaser";
+import Phaser from 'phaser';
 
 // Create scene
 class ModeSelectionScene extends Phaser.Scene {
   constructor() {
     super({
       // Assigning a key to the the scene
-      key: "ModeSelectionScene",
+      key: 'ModeSelectionScene',
     });
   }
 
@@ -17,32 +17,32 @@ class ModeSelectionScene extends Phaser.Scene {
   create() {
     // Creating interactive text to enter single player scene
     this.add
-      .text(640, 360, "Single Player", {
-        font: "30pt Arial",
+      .text(640, 360, 'Single Player', {
+        font: '30pt Arial',
       })
       .setInteractive()
       .setOrigin(0.5, 0.5)
       .on(
-        "pointerdown",
+        'pointerdown',
         () => {
-          this.scene.start("GameScene");
+          this.scene.start('GameScene');
         },
-        this
+        this,
       );
 
     // Creating interactive text to enter multiplayer scene
     this.add
-      .text(640, 460, "Multiplayer", {
-        font: "30pt Arial",
+      .text(640, 460, 'Multiplayer', {
+        font: '30pt Arial',
       })
       .setInteractive()
       .setOrigin(0.5, 0.5)
       .on(
-        "pointerdown",
+        'pointerdown',
         () => {
-          this.scene.start("LobbyScene");
+          this.scene.start('LobbyScene');
         },
-        this
+        this,
       );
   }
 }

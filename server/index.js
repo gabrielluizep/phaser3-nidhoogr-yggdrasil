@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require('express');
 
 const app = express();
-const server = require("http").Server(app);
+const server = require('http').Server(app);
 
 const PORT = 1506;
 
-app.use(express.static("./dist"));
+app.use(express.static('./dist'));
 server.listen(PORT, () => console.log(`Server listening on port ${PORT}!`));
